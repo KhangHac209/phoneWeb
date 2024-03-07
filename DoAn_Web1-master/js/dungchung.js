@@ -1,16 +1,17 @@
-var adminInfo = [{
-    "username": "admin",
-    "pass": "adadad"
-}];
+var adminInfo = [
+    {
+        username: "admin",
+        pass: "adadad",
+    },
+];
 
 function getListAdmin() {
-    return JSON.parse(window.localStorage.getItem('ListAdmin'));
+    return JSON.parse(window.localStorage.getItem("ListAdmin"));
 }
 
 function setListAdmin(l) {
-    window.localStorage.setItem('ListAdmin', JSON.stringify(l));
+    window.localStorage.setItem("ListAdmin", JSON.stringify(l));
 }
-
 
 // Hàm khởi tạo, tất cả các trang đều cần
 function khoiTao() {
@@ -26,17 +27,17 @@ function khoiTao() {
 // ========= Các hàm liên quan tới danh sách sản phẩm =========
 // Localstorage cho dssp: 'ListProducts
 function setListProducts(newList) {
-    window.localStorage.setItem('ListProducts', JSON.stringify(newList));
+    window.localStorage.setItem("ListProducts", JSON.stringify(newList));
 }
 
 function getListProducts() {
-    return JSON.parse(window.localStorage.getItem('ListProducts'));
+    return JSON.parse(window.localStorage.getItem("ListProducts"));
 }
 
 function timKiemTheoTen(list, ten, soluong) {
     var tempList = copyObject(list);
     var result = [];
-    ten = ten.split(' ');
+    ten = ten.split(" ");
 
     for (var sp of tempList) {
         var correct = true;
@@ -69,7 +70,7 @@ function copyObject(o) {
 // ============== ALert Box ===============
 // div có id alert được tạo trong hàm addFooter
 function addAlertBox(text, bgcolor, textcolor, time) {
-    var al = document.getElementById('alert');
+    var al = document.getElementById("alert");
     al.childNodes[0].nodeValue = text;
     al.style.backgroundColor = bgcolor;
     al.style.opacity = 1;
@@ -84,44 +85,44 @@ function addAlertBox(text, bgcolor, textcolor, time) {
 }
 
 function addEventCloseAlertButton() {
-    document.getElementById('closebtn')
-        .addEventListener('mouseover', (event) => {
-            // event.target.parentElement.style.display = "none";
-            event.target.parentElement.style.opacity = 0;
-            event.target.parentElement.style.zIndex = 0;
-        });
+    document.getElementById("closebtn").addEventListener("mouseover", (event) => {
+        // event.target.parentElement.style.display = "none";
+        event.target.parentElement.style.opacity = 0;
+        event.target.parentElement.style.zIndex = 0;
+    });
 }
 
 // ================ Cart Number + Thêm vào Giỏ hàng ======================
 function animateCartNumber() {
     // Hiệu ứng cho icon giỏ hàng
-    var cn = document.getElementsByClassName('cart-number')[0];
-    cn.style.transform = 'scale(2)';
-    cn.style.backgroundColor = 'rgba(255, 0, 0, 0.8)';
-    cn.style.color = 'white';
+    var cn = document.getElementsByClassName("cart-number")[0];
+    cn.style.transform = "scale(2)";
+    cn.style.backgroundColor = "rgba(255, 0, 0, 0.8)";
+    cn.style.color = "white";
     setTimeout(function () {
-        cn.style.transform = 'scale(1)';
-        cn.style.backgroundColor = 'transparent';
-        cn.style.color = 'red';
+        cn.style.transform = "scale(1)";
+        cn.style.backgroundColor = "transparent";
+        cn.style.color = "red";
     }, 1200);
 }
 
 function themVaoGioHang(masp, tensp) {
     var user = getCurrentUser();
     if (!user) {
-        alert('Bạn cần đăng nhập để mua hàng !');
+        alert("Bạn cần đăng nhập để mua hàng !");
         showTaiKhoan(true);
         return;
     }
     if (user.off) {
-        alert('Tài khoản của bạn hiện đang bị khóa nên không thể mua hàng!');
-        addAlertBox('Tài khoản của bạn đã bị khóa bởi Admin.', '#aa0000', '#fff', 10000);
+        alert("Tài khoản của bạn hiện đang bị khóa nên không thể mua hàng!");
+        addAlertBox("Tài khoản của bạn đã bị khóa bởi Admin.", "#aa0000", "#fff", 10000);
         return;
     }
     var t = new Date();
-    var daCoSanPham = false;;
+    var daCoSanPham = false;
 
-    for (var i = 0; i < user.products.length; i++) { // check trùng sản phẩm
+    for (var i = 0; i < user.products.length; i++) {
+        // check trùng sản phẩm
         if (user.products[i].ma == masp) {
             user.products[i].soluong++;
             daCoSanPham = true;
@@ -129,16 +130,17 @@ function themVaoGioHang(masp, tensp) {
         }
     }
 
-    if (!daCoSanPham) { // nếu không trùng thì mới thêm sản phẩm vào user.products
+    if (!daCoSanPham) {
+        // nếu không trùng thì mới thêm sản phẩm vào user.products
         user.products.push({
-            "ma": masp,
-            "soluong": 1,
-            "date": t
+            ma: masp,
+            soluong: 1,
+            date: t,
         });
     }
 
     animateCartNumber();
-    addAlertBox('Đã thêm ' + tensp + ' vào giỏ.', '#17c671', '#fff', 3500);
+    addAlertBox("Đã thêm " + tensp + " vào giỏ.", "#17c671", "#fff", 3500);
 
     setCurrentUser(user); // cập nhật giỏ hàng cho user hiện tại
     updateListUser(user); // cập nhật list user
@@ -149,16 +151,16 @@ function themVaoGioHang(masp, tensp) {
 
 // Hàm get set cho người dùng hiện tại đã đăng nhập
 function getCurrentUser() {
-    return JSON.parse(window.localStorage.getItem('CurrentUser')); // Lấy dữ liệu từ localstorage
+    return JSON.parse(window.localStorage.getItem("CurrentUser")); // Lấy dữ liệu từ localstorage
 }
 
 function setCurrentUser(u) {
-    window.localStorage.setItem('CurrentUser', JSON.stringify(u));
+    window.localStorage.setItem("CurrentUser", JSON.stringify(u));
 }
 
 // Hàm get set cho danh sách người dùng
 function getListUser() {
-    var data = JSON.parse(window.localStorage.getItem('ListUser')) || []
+    var data = JSON.parse(window.localStorage.getItem("ListUser")) || [];
     var l = [];
     for (var d of data) {
         l.push(d);
@@ -167,7 +169,7 @@ function getListUser() {
 }
 
 function setListUser(l) {
-    window.localStorage.setItem('ListUser', JSON.stringify(l));
+    window.localStorage.setItem("ListUser", JSON.stringify(l));
 }
 
 // Sau khi chỉnh sửa 1 user 'u' thì cần hàm này để cập nhật lại vào ListUser
@@ -175,7 +177,7 @@ function updateListUser(u, newData) {
     var list = getListUser();
     for (var i = 0; i < list.length; i++) {
         if (equalUser(u, list[i])) {
-            list[i] = (newData ? newData : u);
+            list[i] = newData ? newData : u;
         }
     }
     setListUser(list);
@@ -193,8 +195,8 @@ function logIn(form) {
     // Kiểm tra xem dữ liệu form có khớp với người dùng nào trong danh sách ko
     for (var u of listUser) {
         if (equalUser(newUser, u)) {
-            if(u.off) {
-                alert('Tài khoản này đang bị khoá. Không thể đăng nhập.');
+            if (u.off) {
+                alert("Tài khoản này đang bị khoá. Không thể đăng nhập.");
                 return false;
             }
 
@@ -209,15 +211,15 @@ function logIn(form) {
     // Đăng nhập vào admin
     for (var ad of adminInfo) {
         if (equalUser(newUser, ad)) {
-            alert('Xin chào admin .. ');
-            window.localStorage.setItem('admin', true);
-            window.location.assign('admin.html');
+            alert("Xin chào admin .. ");
+            window.localStorage.setItem("admin", true);
+            window.location.assign("admin.html");
             return false;
         }
     }
 
     // Trả về thông báo nếu không khớp
-    alert('Nhập sai tên hoặc mật khẩu !!!');
+    alert("Nhập sai tên hoặc mật khẩu !!!");
     form.username.focus();
     return false;
 }
@@ -236,7 +238,7 @@ function signUp(form) {
     // Kiểm tra trùng admin
     for (var ad of adminInfo) {
         if (newUser.username == ad.username) {
-            alert('Tên đăng nhập đã có người sử dụng !!');
+            alert("Tên đăng nhập đã có người sử dụng !!");
             return false;
         }
     }
@@ -244,32 +246,32 @@ function signUp(form) {
     // Kiểm tra xem dữ liệu form có trùng với khách hàng đã có không
     for (var u of listUser) {
         if (newUser.username == u.username) {
-            alert('Tên đăng nhập đã có người sử dụng !!');
+            alert("Tên đăng nhập đã có người sử dụng !!");
             return false;
         }
     }
 
     // Lưu người mới vào localstorage
     listUser.push(newUser);
-    window.localStorage.setItem('ListUser', JSON.stringify(listUser));
+    window.localStorage.setItem("ListUser", JSON.stringify(listUser));
 
     // Đăng nhập vào tài khoản mới tạo
-    window.localStorage.setItem('CurrentUser', JSON.stringify(newUser));
-    alert('Đăng kí thành công, Bạn sẽ được tự động đăng nhập!');
+    window.localStorage.setItem("CurrentUser", JSON.stringify(newUser));
+    alert("Đăng kí thành công, Bạn sẽ được tự động đăng nhập!");
     location.reload();
 
     return false;
 }
 
 function logOut() {
-    window.localStorage.removeItem('CurrentUser');
+    window.localStorage.removeItem("CurrentUser");
     location.reload();
 }
 
 // Hiển thị form tài khoản, giá trị truyền vào là true hoặc false
 function showTaiKhoan(show) {
-    var value = (show ? "scale(1)" : "scale(0)");
-    var div = document.getElementsByClassName('containTaikhoan')[0];
+    var value = show ? "scale(1)" : "scale(0)";
+    var div = document.getElementsByClassName("containTaikhoan")[0];
     div.style.transform = value;
 }
 
@@ -283,58 +285,62 @@ function checkTaiKhoan() {
 
 // Tạo event, hiệu ứng cho form tài khoản
 function setupEventTaiKhoan() {
-    var taikhoan = document.getElementsByClassName('taikhoan')[0];
-    var list = taikhoan.getElementsByTagName('input');
+    var taikhoan = document.getElementsByClassName("taikhoan")[0];
+    var list = taikhoan.getElementsByTagName("input");
 
     // Tạo eventlistener cho input để tạo hiệu ứng label
     // Gồm 2 event onblur, onfocus được áp dụng cho từng input trong list bên trên
-    ['blur', 'focus'].forEach(function (evt) {
+    ["blur", "focus"].forEach(function (evt) {
         for (var i = 0; i < list.length; i++) {
             list[i].addEventListener(evt, function (e) {
                 var label = this.previousElementSibling; // lấy element ĐỨNG TRƯỚC this, this ở đây là input
-                if (e.type === 'blur') { // khi ấn chuột ra ngoài
-                    if (this.value === '') { // không có value trong input thì đưa label lại như cũ
-                        label.classList.remove('active');
-                        label.classList.remove('highlight');
-                    } else { // nếu có chữ thì chỉ tắt hightlight chứ không tắt active, active là dịch chuyển lên trên
-                        label.classList.remove('highlight');
+                if (e.type === "blur") {
+                    // khi ấn chuột ra ngoài
+                    if (this.value === "") {
+                        // không có value trong input thì đưa label lại như cũ
+                        label.classList.remove("active");
+                        label.classList.remove("highlight");
+                    } else {
+                        // nếu có chữ thì chỉ tắt hightlight chứ không tắt active, active là dịch chuyển lên trên
+                        label.classList.remove("highlight");
                     }
-                } else if (e.type === 'focus') { // khi focus thì label active + hightlight
-                    label.classList.add('active');
-                    label.classList.add('highlight');
+                } else if (e.type === "focus") {
+                    // khi focus thì label active + hightlight
+                    label.classList.add("active");
+                    label.classList.add("highlight");
                 }
             });
         }
-    })
+    });
 
     // Event chuyển tab login-signup
-    var tab = document.getElementsByClassName('tab');
+    var tab = document.getElementsByClassName("tab");
     for (var i = 0; i < tab.length; i++) {
-        var a = tab[i].getElementsByTagName('a')[0];
-        a.addEventListener('click', function (e) {
+        var a = tab[i].getElementsByTagName("a")[0];
+        a.addEventListener("click", function (e) {
             e.preventDefault(); // tắt event mặc định
 
             // Thêm active(màu xanh lá) cho li chứa tag a này => ấn login thì login xanh, signup thì signup sẽ xanh
-            this.parentElement.classList.add('active');
+            this.parentElement.classList.add("active");
 
             // Sau khi active login thì phải tắt active sigup và ngược lại
             // Trường hợp a này thuộc login => <li>Login</li> sẽ có nextElement là <li>SignUp</li>
             if (this.parentElement.nextElementSibling) {
-                this.parentElement.nextElementSibling.classList.remove('active');
+                this.parentElement.nextElementSibling.classList.remove("active");
             }
             // Trường hợp a này thuộc signup => <li>SignUp</li> sẽ có .previousElement là <li>Login</li>
             if (this.parentElement.previousElementSibling) {
-                this.parentElement.previousElementSibling.classList.remove('active');
+                this.parentElement.previousElementSibling.classList.remove("active");
             }
 
             // Ẩn phần nhập của login nếu ấn signup và ngược lại
             // href của 2 tab signup và login là #signup và #login -> tiện cho việc getElement dưới đây
-            var target = this.href.split('#')[1];
-            document.getElementById(target).style.display = 'block';
+            var target = this.href.split("#")[1];
+            document.getElementById(target).style.display = "block";
 
-            var hide = (target == 'login' ? 'signup' : 'login');
-            document.getElementById(hide).style.display = 'none';
-        })
+            var hide = target == "login" ? "signup" : "login";
+            document.getElementById(hide).style.display = "none";
+        });
     }
 
     // Đoạn code tạo event trên được chuyển về js thuần từ code jquery
@@ -346,13 +352,11 @@ function capNhat_ThongTin_CurrentUser() {
     var u = getCurrentUser();
     if (u) {
         // Cập nhật số lượng hàng vào header
-        document.getElementsByClassName('cart-number')[0].innerHTML = getTongSoLuongSanPhamTrongGioHang(u);
+        document.getElementsByClassName("cart-number")[0].innerHTML = getTongSoLuongSanPhamTrongGioHang(u);
         // Cập nhật tên người dùng
-        document.getElementsByClassName('member')[0]
-            .getElementsByTagName('a')[0].childNodes[2].nodeValue = ' ' + u.username;
+        document.getElementsByClassName("member")[0].getElementsByTagName("a")[0].childNodes[2].nodeValue = " " + u.username;
         // bỏ class hide của menu người dùng
-        document.getElementsByClassName('menuMember')[0]
-            .classList.remove('hide');
+        document.getElementsByClassName("menuMember")[0].classList.remove("hide");
     }
 }
 
@@ -368,19 +372,21 @@ function getTongSoLuongSanPhamTrongGioHang(u) {
 // lấy số lương của sản phẩm NÀO ĐÓ của user NÀO ĐÓ được truyền vào
 function getSoLuongSanPhamTrongUser(tenSanPham, user) {
     for (var p of user.products) {
-        if (p.name == tenSanPham)
-            return p.soluong;
+        if (p.name == tenSanPham) return p.soluong;
     }
     return 0;
 }
 
-// ==================== Những hàm khác ===================== 
+// ==================== Những hàm khác =====================
 function numToString(num, char) {
-    return num.toLocaleString().split(',').join(char || '.');
+    return num
+        .toLocaleString()
+        .split(",")
+        .join(char || ".");
 }
 
 function stringToNum(str, char) {
-    return Number(str.split(char || '.').join(''));
+    return Number(str.split(char || ".").join(""));
 }
 
 // https://www.w3schools.com/howto/howto_js_autocomplete.asp
@@ -388,8 +394,12 @@ function autocomplete(inp, arr) {
     var currentFocus;
 
     inp.addEventListener("keyup", function (e) {
-        if (e.keyCode != 13 && e.keyCode != 40 && e.keyCode != 38) { // not Enter,Up,Down arrow
-            var a, b, i, val = this.value;
+        if (e.keyCode != 13 && e.keyCode != 40 && e.keyCode != 38) {
+            // not Enter,Up,Down arrow
+            var a,
+                b,
+                i,
+                val = this.value;
 
             /*close any already open lists of autocompleted values*/
             closeAllLists();
@@ -410,7 +420,6 @@ function autocomplete(inp, arr) {
             for (i = 0; i < arr.length; i++) {
                 /*check if the item starts with the same letters as the text field value:*/
                 if (arr[i].name.substr(0, val.length).toUpperCase() == val.toUpperCase()) {
-
                     /*create a DIV element for each matching element:*/
                     b = document.createElement("DIV");
 
@@ -435,7 +444,6 @@ function autocomplete(inp, arr) {
                 }
             }
         }
-
     });
     /*execute a function presses a key on the keyboard:*/
     inp.addEventListener("keydown", function (e) {
@@ -446,7 +454,8 @@ function autocomplete(inp, arr) {
             currentFocus++;
             /*and and make the current item more visible:*/
             addActive(x);
-        } else if (e.keyCode == 38) { //up
+        } else if (e.keyCode == 38) {
+            //up
             /*If the arrow UP key is pressed,
             decrease the currentFocus variable:*/
             currentFocus--;
@@ -471,7 +480,7 @@ function autocomplete(inp, arr) {
         /*start by removing the "active" class on all items:*/
         removeActive(x);
         if (currentFocus >= x.length) currentFocus = 0;
-        if (currentFocus < 0) currentFocus = (x.length - 1);
+        if (currentFocus < 0) currentFocus = x.length - 1;
         /*add class "autocomplete-active":*/
         x[currentFocus].classList.add("autocomplete-active");
     }
@@ -503,16 +512,16 @@ function addTags(nameTag, link) {
     var new_tag = `<a href=` + link + `>` + nameTag + `</a>`;
 
     // Thêm <a> vừa tạo vào khung tìm kiếm
-    var khung_tags = document.getElementsByClassName('tags')[0];
+    var khung_tags = document.getElementsByClassName("tags")[0];
     khung_tags.innerHTML += new_tag;
 }
 
 // Thêm sản phẩm vào trang
 function addProduct(p, ele, returnString) {
-	promo = new Promo(p.promo.name, p.promo.value); // class Promo
-	product = new Product(p.masp, p.name, p.img, p.price, p.star, p.rateCount, promo); // Class product
+    promo = new Promo(p.promo.name, p.promo.value); // class Promo
+    product = new Product(p.masp, p.name, p.img, p.price, p.star, p.rateCount, promo); // Class product
 
-	return addToWeb(product, ele, returnString);
+    return addToWeb(product, ele, returnString);
 }
 
 // Thêm topnav vào trang
@@ -530,9 +539,7 @@ function addTopNav() {
             <ul class="top-nav-quicklink flexContain">
                 <li><a href="index.html"><i class="fa fa-home"></i> Trang chủ</a></li>
                 <li><a href="tintuc.html"><i class="fa fa-newspaper-o"></i> Tin tức</a></li>
-                <li><a href="tuyendung.html"><i class="fa fa-handshake-o"></i> Tuyển dụng</a></li>
                 <li><a href="gioithieu.html"><i class="fa fa-info-circle"></i> Giới thiệu</a></li>
-                <li><a href="trungtambaohanh.html"><i class="fa fa-wrench"></i> Bảo hành</a></li>
                 <li><a href="lienhe.html"><i class="fa fa-phone"></i> Liên hệ</a></li>
             </ul> <!-- End Quick link -->
         </section><!-- End Section -->
@@ -560,9 +567,6 @@ function addHeader() {
                         </button>
                     </div>
                 </form> <!-- End Form search -->
-                <div class="tags">
-                    <strong>Từ khóa: </strong>
-                </div>
             </div> <!-- End Search header -->
 
             <div class="tools-member">
@@ -594,7 +598,7 @@ function addHeader() {
                 </div> -->
             </div><!-- End Tools Member -->
         </div> <!-- End Content -->
-    </div> <!-- End Header -->`)
+    </div> <!-- End Header -->`);
 }
 
 function addFooter() {
@@ -724,41 +728,43 @@ function addPlc() {
 
 // https://stackoverflow.com/a/2450976/11898496
 function shuffleArray(array) {
-    let currentIndex = array.length,  randomIndex;
+    let currentIndex = array.length,
+        randomIndex;
 
     // While there remain elements to shuffle...
     while (currentIndex != 0) {
-
         // Pick a remaining element...
         randomIndex = Math.floor(Math.random() * currentIndex);
         currentIndex--;
 
         // And swap it with the current element.
-        [array[currentIndex], array[randomIndex]] = [
-        array[randomIndex], array[currentIndex]];
+        [array[currentIndex], array[randomIndex]] = [array[randomIndex], array[currentIndex]];
     }
 
     return array;
 }
 
 function checkLocalStorage() {
-    if (typeof (Storage) == "undefined") {
-        alert('Máy tính không hỗ trợ LocalStorage. Không thể lưu thông tin sản phẩm, khách hàng!!');
+    if (typeof Storage == "undefined") {
+        alert("Máy tính không hỗ trợ LocalStorage. Không thể lưu thông tin sản phẩm, khách hàng!!");
     } else {
-        console.log('LocaStorage OKE!');
+        console.log("LocaStorage OKE!");
     }
 }
 
 // Di chuyển lên đầu trang
 function gotoTop() {
     if (window.jQuery) {
-        jQuery('html,body').animate({
-            scrollTop: 0
-        }, 100);
+        jQuery("html,body").animate(
+            {
+                scrollTop: 0,
+            },
+            100
+        );
     } else {
-        document.getElementsByClassName('top-nav')[0].scrollIntoView({
-            behavior: 'smooth',
-            block: 'start'
+        document.getElementsByClassName("top-nav")[0].scrollIntoView({
+            behavior: "smooth",
+            block: "start",
         });
         document.body.scrollTop = 0; // For Safari
         document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
@@ -767,8 +773,8 @@ function gotoTop() {
 
 // Lấy màu ngẫu nhiên
 function getRandomColor() {
-    var letters = '0123456789ABCDEF';
-    var color = '#';
+    var letters = "0123456789ABCDEF";
+    var color = "#";
     for (var i = 0; i < 6; i++) {
         color += letters[Math.floor(Math.random() * 16)];
     }
@@ -777,19 +783,19 @@ function getRandomColor() {
 
 // Test, not finished
 function auto_Get_Database() {
-    var ul = document.getElementsByClassName('homeproduct')[0];
-    var li = ul.getElementsByTagName('li');
+    var ul = document.getElementsByClassName("homeproduct")[0];
+    var li = ul.getElementsByTagName("li");
     for (var l of li) {
-        var a = l.getElementsByTagName('a')[0];
+        var a = l.getElementsByTagName("a")[0];
         // name
-        var name = a.getElementsByTagName('h3')[0].innerHTML;
+        var name = a.getElementsByTagName("h3")[0].innerHTML;
 
         // price
-        var price = a.getElementsByClassName('price')[0]
-        price = price.getElementsByTagName('strong')[0].innerHTML;
+        var price = a.getElementsByClassName("price")[0];
+        price = price.getElementsByTagName("strong")[0].innerHTML;
 
         // img
-        var img = a.getElementsByTagName('img')[0].src;
+        var img = a.getElementsByTagName("img")[0].src;
         console.log(img);
 
         // // rating
@@ -810,7 +816,7 @@ function auto_Get_Database() {
 
 function getThongTinSanPhamFrom_TheGioiDiDong() {
     javascript: (function () {
-        var s = document.createElement('script');
+        var s = document.createElement("script");
         s.innerHTML = `
 			(function () {
 				var ul = document.getElementsByClassName('parameter')[0];
