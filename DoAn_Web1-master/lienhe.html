@@ -39,33 +39,30 @@
             <div class="lienhe-info">
                 <div class="info-left">
                     <p>
-                        <h2 style="color: gray"> CÔNG TY CỔ PHẦN H - GROUP </h2><br />
-                        <b>Địa chỉ:</b> 273 An Dương Vương, phường 3, Quận 5, TPHCM<br /><br />
-                        <b>Telephone:</b> 0908070605<br /><br />
-                        <b>Hotline:</b> 0908070605 - CSKH: 0908070605<br /><br />
-                        <b>Website:</b> <a href="https://github.com/HoangTran0410/DoAn_Web1">Github</a> <br /><br />
-                        <b>E-mail:</b> DoAn@gmail.com<br /><br />
-                        <b>Mã số thuế:</b> 01 02 03 04 05<br /><br />
-                        <b>Tài khoản ngân hàng :</b><br /><br />
-                        <b>Số TK:</b> 060008086888 <br /><br />
-                        <b>Tại Ngân hàng:</b> Agribank Chi nhánh Sài Gòn<br /><br /><br /><br />
-                        <b>Quý khách có thể gửi liên hệ tới chúng tôi bằng cách hoàn tất biểu mẫu dưới đây. Chúng tôi
-                            sẽ trả lời thư của quý khách, xin vui lòng khai báo đầy đủ. Hân hạnh phục vụ và chân thành
-                            cảm ơn sự quan tâm, đóng góp ý kiến đến Smartphone Store.</b>
+                    <h2 style="color: gray"> CÔNG TY CỔ PHẦN H - GROUP </h2><br />
+                    <b>Địa chỉ:</b> 123, phường 2, Quận 10, TPHCM<br /><br />
+                    <b>Telephone:</b> 0908070605<br /><br />
+                    <b>Hotline:</b> 0908070605 - CSKH: 0908070605<br /><br />
+                    <b>Website:</b> <a href="https://github.com/KhangHac209/phoneWeb">Github</a> <br /><br />
+                    <b>E-mail:</b> 123@gmail.com<br /><br />
+                    <b>Mã số thuế:</b> 01 02 03 04 05<br /><br />
+                    <b>Tài khoản ngân hàng :</b><br /><br />
+                    <b>Số TK:</b> 090909090909 <br /><br />
+                    <b>Tại Ngân hàng:</b> Agribank Chi nhánh Sài Gòn<br /><br /><br /><br />
+                    <b>Quý khách có thể gửi liên hệ tới chúng tôi bằng cách hoàn tất biểu mẫu dưới đây. Chúng tôi
+                        sẽ trả lời thư của quý khách, xin vui lòng khai báo đầy đủ. Hân hạnh phục vụ và chân thành
+                        cảm ơn sự quan tâm, đóng góp ý kiến đến Smartphone Store.</b>
                     </p>
                 </div>
                 <div class="info-right">
-                    <iframe width="100%" height="450" src="https://maps.google.com/maps?width=100%&amp;height=450&amp;hl=en&amp;coord=10.759660000323064,106.68192160315813&amp;q=273%20An%20D%C6%B0%C6%A1ng%20V%C6%B0%C6%A1ng%20Ph%C6%B0%E1%BB%9Dng%203%20Qu%E1%BA%ADn%205%20H%E1%BB%93%20Ch%C3%AD%20Minh%20700000%2C%20Vi%E1%BB%87t%20Nam+(My%20Business%20Name)&amp;ie=UTF8&amp;t=&amp;z=16&amp;iwloc=B&amp;output=embed"
-                        frameborder="0" scrolling="no" marginheight="0" marginwidth="0"><a href="https://www.maps.ie/create-google-map/">Embed
-                            Google Map
-                        </a>
-                    </iframe>
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3918.2901094780163!2d106.59805157485839!3d10.865525089288738!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752b088de30f3b%3A0xd2140740d360f705!2zVHLGsOG7nW5nIMSQ4bqhaSBo4buNYyBOZ2_huqFpIG5n4buvIC0gVGluIGjhu41jIFRQLiBIQ00gKEhVRkxJVCkgLSBDxqEgc-G7nyBIw7NjIE3DtG4!5e0!3m2!1svi!2s!4v1711080532696!5m2!1svi!2s"
+                        width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade"></iframe>
                     <br />
                 </div>
             </div>
             <div class="lienhe-info">
-
-                <!--  -->
                 <div class="thongtinnhom">
                     <p style="font-size: 22px; color: gray">Thông tin thành viên nhóm: </p>
                     <hr />
@@ -78,32 +75,51 @@
                             <th>Tỉ lệ công việc</th>
                         </tr>
                         <script>
-                            var thongtin = [
-                            ]
-                            for (var i = 0; i < thongtin.length; i++) {
+                            class Info {
+                                constructor(name, studentID, gender, className, workRatio) {
+                                    this.name = name;
+                                    this.studentID = studentID;
+                                    this.gender = gender;
+                                    this.className = className;
+                                    this.workRatio = workRatio;
+                                }
+                            }
+
+                            class InfoFactory {
+                                createInfo(name, studentID, gender, className, workRatio) {
+                                    return new Info(name, studentID, gender, className, workRatio);
+                                }
+                            }
+
+                            const infoFactory = new InfoFactory();
+                            const thongtin = [
+                                // Example data for Info objects
+                                ["Khang", "21DH110800", "Male", "A", "70%"],
+                                ["Kha", "21DH113732", "Male", "A", "70%"],
+                                ["Tân", "21DH112910", "Male", "A", "70%"],
+                                ["Đạt", "21DH112396", "Male", "A", "70%"],
+                            ];
+
+                            for (let i = 0; i < thongtin.length; i++) {
+                                const [name, studentID, gender, className, workRatio] = thongtin[i];
+                                const info = infoFactory.createInfo(name, studentID, gender, className, workRatio);
                                 document.write(
                                     `
-                                    <tr>
-                                        <td>` +
-                                    thongtin[i][0] + `</td>
-                                        <td>` +
-                                    thongtin[i][1] + `</td>
-                                        <td>` +
-                                    thongtin[i][2] + `</td>
-                                        <td>` +
-                                    thongtin[i][3] + `</td>
-                                        <td>` +
-                                    thongtin[i][4] +
-                                    `</td>
-                                    </tr>
-                                `
-                                )
+                              <tr>
+                                <td>${info.name}</td>
+                                <td>${info.studentID}</td>
+                                <td>${info.gender}</td>
+                                <td>${info.className}</td>
+                                <td>${info.workRatio}</td>
+                              </tr>
+                            `
+                                );
                             }
                         </script>
                     </table>
                 </div>
-
             </div>
+        </div>
         </div>
     </section>
 
