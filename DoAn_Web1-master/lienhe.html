@@ -94,11 +94,10 @@
 
                             const infoFactory = new InfoFactory();
                             const thongtin = [
-                                // Example data for Info objects
-                                ["Khang", "21DH110800", "Male", "A", "70%"],
-                                ["Kha", "21DH113732", "Male", "A", "70%"],
-                                ["Tân", "21DH112910", "Male", "A", "70%"],
-                                ["Đạt", "21DH112396", "Male", "A", "70%"],
+                                ["Khang", "21DH110800", "Male", "A", "25%"],
+                                ["Kha", "21DH113732", "Male", "A", "25%"],
+                                ["Tân", "21DH112910", "Male", "A", "25%"],
+                                ["Đạt", "21DH112396", "Male", "A", "25%"],
                             ];
 
                             for (let i = 0; i < thongtin.length; i++) {
@@ -106,14 +105,14 @@
                                 const info = infoFactory.createInfo(name, studentID, gender, className, workRatio);
                                 document.write(
                                     `
-                              <tr>
-                                <td>${info.name}</td>
-                                <td>${info.studentID}</td>
-                                <td>${info.gender}</td>
-                                <td>${info.className}</td>
-                                <td>${info.workRatio}</td>
-                              </tr>
-                            `
+                                    <tr>
+                                        <td>${info.name}</td>
+                                        <td>${info.studentID}</td>
+                                        <td>${info.gender}</td>
+                                        <td>${info.className}</td>
+                                        <td>${info.workRatio}</td>
+                                    </tr>
+                                    `
                                 );
                             }
                         </script>
